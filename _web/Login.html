@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="_css/style.css">
+    <link rel="shortcut icon" href="_img/Main Logo Transparent.png" type="image/x-icon">
+    <title>Division Models</title>
+
+    <script src="_js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+ 
+</head>
+<body>
+    <div class="Nav Flexbox">
+
+        <div class="Nav_LogoImage" style="width: 50%;"></div>
+        <div class="Flexbox" style="width: 50%;">
+            <button onclick="window.location.href='index.html'">Home</button>
+            <button onclick="window.location.href='Login.html'">Login</button>
+            <button onclick="window.location.href='Register.html'">Register</button>
+            <button>Files</button>
+        </div>
+
+        
+    </div>
+    <!-- MAIN BODY -->
+    <div class="Flexbox FlexAdvanced2 Image" style="background-image: url('_img/LoginBackground.png');background-size: cover;">
+        <div style="width: 50vw;"></div>
+        <div style="width: 50vw;margin-right: 1%;">
+
+            <label for="uname"><b>Username</b></label><br>
+            <input id="Input_UserName" type="text" placeholder="Enter Username" name="uname" required>
+            <br>
+            <label for="psw"><b>Password</b></label><br>
+            <input id="Input_Password"type="password" placeholder="Enter Password" name="psw" required>
+            <br>
+            <button type="submit" onclick="Login()">Login</button>
+            <br>
+            <!-- <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label> -->
+    
+            
+        </div>
+    </div>
+
+    
+</body>
+</html>

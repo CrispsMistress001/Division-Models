@@ -1,0 +1,130 @@
+body{
+    margin: 0;
+    left: 0;
+    background-color: black;
+}
+
+.Nav{
+    width: 100%;
+    height: 10vh;
+
+    background-color: rgb(92, 92, 92);
+}
+.Nav > div{
+    min-height: 100px;
+    height: 10vh;
+}
+.Nav > div > button{
+    text-decoration: none;
+    outline: none;
+    width: 20%;
+    margin-left: 5%;
+    height: 5vh;
+    margin: 0;
+
+    font-size: 4vh;
+    color: #78bac4;
+    display:inline-block;
+    border: 0;
+    background-color: transparent;
+    font-family:  'Bebas Neue', cursive;
+}
+
+.Nav > div > button:after {
+    display:block;
+    content: '';
+    border-bottom: solid 3px #019fb6;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+}
+
+.Nav > div > button:hover:after { transform: scaleX(1); }
+
+.Flexbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Nav_LogoImage{
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: 80% auto;
+    background-image: url("../_img/Main Logo Transparent.png");
+}
+
+h3{
+    font-size: 15vh;
+    text-align: center;
+    width: 50vw;
+    color: whitesmoke;
+    font-family:  'Bebas Neue', cursive;
+
+}
+
+.Image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.FlexAdvanced > div{
+    height: 70vh ;
+
+}
+
+
+.FlexAdvanced2 > div{
+    display: flex;
+    height: 100vh ;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.FlexAdvanced2 > div > input[type=text], input[type=password] {
+    width: 100%;
+    border-radius: 8px;
+    text-decoration: none;
+    outline: none;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: larger;
+  }
+
+
+.FlexAdvanced2 > div > label{
+    color: white;
+    font-family:  'Bebas Neue', cursive;
+    font-size: xx-large;
+}
+.FlexAdvanced2 > div > button{
+    width: 30%;
+    border: 0;
+    height: 5vh;
+    font-size: larger;
+    border-radius: 8px;
+}
+.button_2 {
+   background-color: #cfcfcf;
+   border: none;
+   color: white;
+   padding: 20px 20px;
+   text-align: center;
+   display: inline-block;
+   font-size: 20px;
+   color: #000000;
+   cursor: pointer;
+   margin: 4px 5px;
+   border-radius: 8px;
+  
+} 
+.button_2:hover{
+  background-color:gray;
+  transition: 1s;
+}
