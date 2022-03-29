@@ -10,7 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.26.1",
-    "express": "^4.17.3"
-  },
-  "devDependencies": {}
+    "cookie-parser": "^1.4.6",
+    "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
+    "express-session": "^1.17.2",
+    "string-sanitizer": "^2.0.2"
+  }
 }

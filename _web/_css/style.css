@@ -128,3 +128,33 @@ h3{
   background-color:gray;
   transition: 1s;
 }
+
+#Slide_Menu{
+    position: relative;
+    width: 25vw;
+    height: 80vh;
+    background-color: #019fb6;
+    float: left;
+
+}
+
+.SlideIn_Anim{
+    animation: SlideIn_Menu 1s;
+}
+.SlideOut_Anim{
+    animation: SlideOut_Menu 1s;
+}
+
+@keyframes SlideOut_Menu{
+    100%{
+        width: 25vw;
+    }   
+    0%{ width: 0;} 
+}
+
+@keyframes SlideIn_Menu{
+    0%{
+        width: 25vw;
+    }   
+    100%{ width: 0;} 
+}

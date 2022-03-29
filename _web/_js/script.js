@@ -18,3 +18,24 @@ function Send_Post_Info(file,value,responseID){
     xttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xttp.send(value); 
 }
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+async function Slide_Menu_Toggle(){
+    Menu = document.getElementById("Slide_Menu");
+    Menu.offsetHeight;
+
+    if(Menu.style.display == "none"){
+        Menu.classList.remove("SlideIn_Anim");
+
+        Menu.classList.add("SlideOut_Anim");
+        Menu.style.display = "block";
+    }else{
+        Menu.classList.remove("SlideOut_Anim");
+
+        Menu.classList.add("SlideIn_Anim");
+        await delay(1000);
+        Menu.style.display = "none";
+    }
+}
