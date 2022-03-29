@@ -34,8 +34,8 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 // CERTIFICATES PART
 
-const privateKey = fs.readFileSync(__dirname+'/SSL/server.key', 'utf8');
-const certificate = fs.readFileSync(__dirname+'/SSL/server.cert', 'utf8');
+const privateKey = fs.readFileSync(__dirname+'/SSL/key.pem', 'utf8');
+const certificate = fs.readFileSync(__dirname+'/SSL/cert.pem', 'utf8');
 //const ca = fs.readFileSync('/etc/letsencrypt/live/DLS.com/chain.pem', 'utf8');
 
 const credentials = {
