@@ -4,20 +4,32 @@ function Login(){
     Name = document.getElementById("Input_UserName").value;
     Pass = document.getElementById("Input_Password").value;
     var DataSent = "Name="+Name+"&Pass="+Pass;
-    Send_Post_Info("Login_Data_Send.html",DataSent,"test")
+    Send_Post_Info("Login_Data_Send.html",DataSent,"test").then((resp)=>{
+        document.getElementById("Response_Tag").innerText = resp;
+            
+        if (resp == "User account has been succesfully created!"){
+            setTimeout(() => {
+            window.location.href = 'Login.html';
+            }, 1000);
+        }
+    });
 }
 
-function Send_Post_Info(file,value,responseID){
-    var xttp = new XMLHttpRequest();
-    xttp.onreadystatechange = function(){
-        if(xttp.readyState == 4 && xttp.status == 200){
-            document.getElementById(responseID).innerText = this.responseText;
+function Send_Post_Info(file,value){
+    return new Promise((resolve,reject)=> {
+        var xttp = new XMLHttpRequest();
+        xttp.onreadystatechange = function(){
+            if(xttp.readyState == 4 && xttp.status == 200){
+                var response = this.responseText;
+                resolve(response);
+            }
         }
-    }
-    xttp.open("POST",file,true);
-    xttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xttp.send(value); 
+        xttp.open("POST",file,true);
+        xttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xttp.send(value); 
+    });
 }
+
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
