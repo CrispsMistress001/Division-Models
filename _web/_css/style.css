@@ -4,12 +4,29 @@ body{
     background-color: black;
 }
 
+button{
+    cursor: pointer;
+}
+
+.unselectable {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+ 
+    /*
+      Introduced in Internet Explorer 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+ }
+
 .Nav{
     width: 100%;
     height: 10vh;
     min-height: 80px;
 
-    background-color: rgb(92, 92, 92);
+    background-color: rgb(49, 48, 54);
 }
 .Nav > div{
     height: 100%;
@@ -69,14 +86,14 @@ h3{
     background-size: 100% auto;
 }
 
-.FlexAdvanced2{
+.LoginTab{
     display: flex;
     align-items: center;
     justify-content: right;
 } 
 
 
-.FlexAdvanced2 > div{
+.LoginTab > div{
     display: flex;
     height: 100vh ;
     align-items: center;
@@ -85,7 +102,7 @@ h3{
 
 }
 
-.FlexAdvanced2 > div > input[type=text], input[type=password] {
+.LoginTab > div > input[type=text], input[type=password] {
     width: 100%;
     border-radius: 8px;
     text-decoration: none;
@@ -93,18 +110,36 @@ h3{
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(126, 126, 126);
+    background-color: #464253;
+    color: white;
+
     box-sizing: border-box;
     font-size: larger;
   }
 
-.FlexAdvanced2 > div > label{
+.LoginTab > div > label{
     color: white;
     font-family:  'Bebas Neue', cursive;
     font-size: xx-large;
 }
-.FlexAdvanced2 > div > button{
-    width: 30%;
+
+
+.LoginTab > div > a{
+    width: 100%;
+    text-align: right;
+    color: white;
+    font-family:  'Bebas Neue', cursive;
+    font-size: xx-large;
+}
+
+.LoginTab > div > div>label{
+    color: white;
+    font-family:  'Bebas Neue', cursive;
+    font-size: xx-large;
+}
+.LoginTab > div > div >button{
+    width: 100%;
     border: 0;
     height: 5vh;
     font-size: larger;

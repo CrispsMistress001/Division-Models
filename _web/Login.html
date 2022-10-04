@@ -28,20 +28,28 @@
         
     </div>
     <!-- MAIN BODY -->
-    <div class="FlexAdvanced2 Image" style="background-image: url('_img/LoginBackground.png');background-size: cover;">
+    <div class="LoginTab Image" style="background-image: url('_img/LoginBackground.png');background-size: cover;">
         <div style="width: 50vw;margin-right: 1%;">
             <label style="color:red;"id="Response_Tag"></label>
+            <a href="">Don't have an account? Register here!</a>
+            <br>
             <label for="uname"><b>Username</b></label><br>
             <input id="Input_UserName" type="text" placeholder="Enter Username" name="uname" required>
             <br>
             <label for="psw"><b>Password</b></label><br>
             <input id="Input_Password"type="password" placeholder="Enter Password" name="psw" required>
             <br>
-            <button type="submit" onclick="Login()">Login</button>
+
+
+            <div>
+                <label class="unselectable">
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+                <button type="submit" onclick="Login()">Login</button>
+
+            </div>
             <br>
-            <!-- <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label> -->
+
     
             
         </div>
