@@ -51,3 +51,18 @@ async function Slide_Menu_Toggle(){
         Menu.style.display = "none";
     }
 }
+
+var Toggled_Burgar = false;
+
+function BurgerMenu_Toggle(x) {
+    x.classList.toggle("change");
+
+    if(Toggled_Burgar){
+        document.getElementById("Nav_Burgar_Menu").style.display = "block";
+    }else{
+        document.getElementById("Nav_Burgar_Menu").style.display = "none";
+
+    }
+
+
+}
