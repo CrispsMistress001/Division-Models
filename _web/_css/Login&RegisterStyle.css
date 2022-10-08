@@ -1,0 +1,78 @@
+
+.LoginTab{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+} 
+
+
+.LoginTab > div{
+    display: flex;
+    height: 100vh ;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.LoginTab > div > input[type=text], input[type=password] {
+    width: 100%;
+    border-radius: 8px;
+    text-decoration: none;
+    outline: none;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid rgb(126, 126, 126);
+    background-color: #464253;
+    color: white;
+
+    box-sizing: border-box;
+    font-size: larger;
+  }
+
+.LoginTab > div > label{
+    color: white;
+    font-family:  'Bebas Neue', cursive;
+    font-size: xx-large;
+}
+
+
+.LoginTab > div > a{
+    width: 100%;
+    text-align: right;
+    color: white;
+    font-family:  'Bebas Neue', cursive;
+    font-size: xx-large;
+}
+
+.LoginTab > div > div>label{
+    color: white;
+    font-family:  'Bebas Neue', cursive;
+    font-size: xx-large;
+}
+.LoginTab > div > div >button{
+    width: 100%;
+    border: 0;
+    height: 5vh;
+    font-size: larger;
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 1000px) {
+    .LoginTab{
+        justify-content: center;
+    }
+    .LoginTab > div{
+        margin-right: 0;
+    }
+
+}
+
+@media screen and (min-width: 1000px) {
+    .LoginTab > div{
+        margin-right: 1%;
+    }
+
+}
+

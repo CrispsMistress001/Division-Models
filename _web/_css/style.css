@@ -86,65 +86,6 @@ h3{
     background-size: 100% auto;
 }
 
-.LoginTab{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-} 
-
-
-.LoginTab > div{
-    display: flex;
-    height: 100vh ;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-}
-
-.LoginTab > div > input[type=text], input[type=password] {
-    width: 100%;
-    border-radius: 8px;
-    text-decoration: none;
-    outline: none;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid rgb(126, 126, 126);
-    background-color: #464253;
-    color: white;
-
-    box-sizing: border-box;
-    font-size: larger;
-  }
-
-.LoginTab > div > label{
-    color: white;
-    font-family:  'Bebas Neue', cursive;
-    font-size: xx-large;
-}
-
-
-.LoginTab > div > a{
-    width: 100%;
-    text-align: right;
-    color: white;
-    font-family:  'Bebas Neue', cursive;
-    font-size: xx-large;
-}
-
-.LoginTab > div > div>label{
-    color: white;
-    font-family:  'Bebas Neue', cursive;
-    font-size: xx-large;
-}
-.LoginTab > div > div >button{
-    width: 100%;
-    border: 0;
-    height: 5vh;
-    font-size: larger;
-    border-radius: 8px;
-}
 .button_2 {
    background-color: #cfcfcf;
    border: none;
@@ -210,7 +151,7 @@ h3{
 }
 .Nav_Burgar_Button{
     width: 15%;
-    height: 10vh;
+    height: 100%;
     background-color: transparent;
     position: relative;
     z-index: 10;
@@ -224,37 +165,71 @@ h3{
 
 .bar1, .bar2, .bar3 {
     width: 70px;
-    height: 5px;
+    height: 7px;
     background-color: rgb(185, 185, 185);
     margin: 6px 0;
     transition: 0.4s;
 }
 
 .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
+    transform: translate(0, 13px) rotate(-45deg);
 }
 
 .change .bar2 {opacity: 0;}
 
 .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
+    transform: translate(0, -13px) rotate(45deg);
 }
 
 #Nav_Burgar_Menu{
-    width: 80vw;
+    width: 100%;
     height: auto;
-    display: flex;
-    
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: right;
+
+    display: none;
+
+    position: absolute;
+    z-index: 2;
+
 }
 
 #Nav_Burgar_Menu > button{
     width: 100%;
     height: 10vh;
 
-    
+    text-decoration: none;
+    outline: none;
+    margin: 0;
+
+    border: 0;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+
+    font-size: xx-large;
+    color: #78bac4;
+    font-family:  'Bebas Neue', cursive;
+
+    animation: BurgerMenuExpand 0.5s;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none;
+}
+
+#Nav_Burgar_Menu > button:hover{
+    transition: 0.5s;
+    background-color: rgb(99, 98, 110);
+}
+
+@keyframes BurgerMenuExpand {
+    0%{
+        height: 0vh;
+        font-size: 0;
+
+    }
+    100%{
+        height: 10vh;
+        font-size: xx-large;
+
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -264,4 +239,5 @@ h3{
     .Nav_Burgar{
         display: block;
     }
+
 }

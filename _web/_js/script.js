@@ -56,13 +56,34 @@ var Toggled_Burgar = false;
 
 function BurgerMenu_Toggle(x) {
     x.classList.toggle("change");
-
-    if(Toggled_Burgar){
-        document.getElementById("Nav_Burgar_Menu").style.display = "block";
-    }else{
-        document.getElementById("Nav_Burgar_Menu").style.display = "none";
-
+    if (1000>window.innerWidth){
+        document.getElementById("Nav_Burgar_Menu").offsetHeight;
+        if(!Toggled_Burgar){
+            Toggled_Burgar = true;
+            document.getElementById("Nav_Burgar_Menu").style.display = "flex";
+        }else{
+            Toggled_Burgar = false;
+            document.getElementById("Nav_Burgar_Menu").style.display = "none";
+        }
     }
 
 
+
 }
+
+function BurgerMenu_Toggler(){
+    if (1000<window.innerWidth){
+        document.getElementById("Nav_Burgar_Menu").style.display = "none";
+    }else{
+        if(Toggled_Burgar == true){
+            document.getElementById("Nav_Burgar_Menu").style.display = "flex";
+        }
+    }
+}
+
+addEventListener("onload",function(event){
+    BurgerMenu_Toggler();
+});
+addEventListener("resize",function(event){
+    BurgerMenu_Toggler();
+});

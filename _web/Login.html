@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="_css/style.css">
+    <link rel="stylesheet" href="_css/Login&RegisterStyle.css">
+
     <link rel="shortcut icon" href="_img/Main Logo Transparent.png" type="image/x-icon">
     <title>Division Models</title>
 
@@ -41,16 +43,15 @@
     </div>
 
     <div id="Nav_Burgar_Menu">
-        <button>Test</button>
-        <button>Test</button>
-        <button>Test</button>
-    
+        <button onclick="window.location.href='index.html'">Home</button>
+        <button onclick="window.location.href='Login.html'">Login</button>
+        <button onclick="window.location.href='Register.html'">Register</button>
+        <button>Files</button>
     </div>
-
 
     <!-- MAIN BODY -->
     <div class="LoginTab Image" style="background-image: url('_img/LoginBackground.png');background-size: cover;">
-        <div style="width: 50vw;margin-right: 1%;">
+        <div style="width: 50vw;">
             <label style="color:red;"id="Response_Tag"></label>
             <a href="">Don't have an account? Register here!</a>
             <br>
@@ -60,14 +61,11 @@
             <label for="psw"><b>Password</b></label><br>
             <input id="Input_Password"type="password" placeholder="Enter Password" name="psw" required>
             <br>
-
-
             <div>
                 <label class="unselectable">
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
                 <button type="submit" onclick="Login()">Login</button>
-
             </div>
             <br>
 
