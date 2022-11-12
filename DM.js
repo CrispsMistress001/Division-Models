@@ -21,6 +21,7 @@ var sanitizer_string = require("string-sanitizer");
 const { callbackify } = require('util');
 const { resolve } = require('path');
 const { ppid } = require('process');
+const session = require('express-session');
 
 
 
@@ -146,14 +147,29 @@ function UserName_Found(Users){
 }
 
 app.get('/',function(req,res){
+    res.sendFile(__dirname + "/_web/index.html");
+});
+
+app.get('/test',function(req,res){
     session=req.session;
     if(session.userid){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     }else{
-        res.sendFile(__dirname + "/_web/index.html");
+        res.send("Well you are not logged in fucker")
     }
 
 });
+
+app.get('/logout',function(req,res){
+    req.session.destroy(function(err){
+        console.log("Failed destroying session!");
+        res.header("Access-Control-Allow-Origin", "*").sendStatus(200);
+    });
+    res.header("Access-Control-Allow-Origin", "*").sendStatus(200);
+
+
+});
+
 
 app.post('/Login_Data_Send.html',async(req,res)=>{
     try {
@@ -170,7 +186,7 @@ app.post('/Login_Data_Send.html',async(req,res)=>{
                 
 
                 if(resp == "true"){
-                    session=req.session;
+                    var session=req.session;
                     session.userid=UserName;
                     // console.log(req.session);
 
