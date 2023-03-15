@@ -45,6 +45,10 @@
     font-family:  'Bebas Neue', cursive;
     font-size: xx-large;
 }
+.LoginTab > div > a > span{
+    color: brown;
+    text-decoration: underline;
+}
 
 .LoginTab > div > div>label{
     color: white;

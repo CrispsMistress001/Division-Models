@@ -14,20 +14,20 @@ const fs = require('fs'), readline = require("readline"); // file reader
 // SESSION AND COOCKIE CONTROL
 const oneDay = 1000 * 60 * 60 * 24;
 const cookieParser = require("cookie-parser");
-const sessions = require('express-session');
 
 //
 var sanitizer_string = require("string-sanitizer");
 const { callbackify } = require('util');
 const { resolve } = require('path');
 const { ppid } = require('process');
-const session = require('express-session');
+const sessions = require('express-session');
 
 
 
 // session middleware
+app.set('trust proxy', 1)
 app.use(sessions({
-    secret: "thisismysecrctekeysadfouhbq3345yuylajlsdcv",
+    secret: "thisismysecrsflkvnshkldfnbjdflbjioej234y48ry69lolnice",
     saveUninitialized:true,
     cookie: { maxAge: oneDay },
     resave: false
@@ -37,16 +37,18 @@ app.use(express.static(__dirname+'/_web'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+var session;
 // CERTIFICATES PART
 
-// const privateKey = fs.readFileSync(__dirname+'/SSL/server.key', 'utf8');
-// const certificate = fs.readFileSync(__dirname+'/SSL/server.cert', 'utf8');
+const privateKey = fs.readFileSync(__dirname+'/SSL/server.key', 'utf8');
+const certificate = fs.readFileSync(__dirname+'/SSL/server.cert', 'utf8');
 
 
-// const credentials = {
-//     key: privateKey,
-//     cert: certificate
-// };
+const credentials = {
+    key: privateKey,
+    cert: certificate
+};
 
 // END OF CERTIFICATES
 
@@ -88,10 +90,9 @@ function Check_Login(Users,Password){
                 }
             });
 
-            readInterface.on('error', function (error) {
+            readInterface.on('error', function (error) {    
                 console.log(`error: ${error.message}`);
             });
-
 
     });
 
@@ -152,6 +153,7 @@ app.get('/',function(req,res){
 
 app.get('/test',function(req,res){
     session=req.session;
+    console.log(session.userid);
     if(session.userid){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     }else{
@@ -161,13 +163,29 @@ app.get('/test',function(req,res){
 });
 
 app.get('/logout',function(req,res){
-    req.session.destroy(function(err){
-        console.log("Failed destroying session!");
-        res.header("Access-Control-Allow-Origin", "*").sendStatus(200);
+    // req.session.destroy(function(err){
+    //     console.log("Failed destroying session!:"+err);
+    // });
+    // req.session = null;
+
+
+    sess=req.session;
+    var data = {
+        "Data":""
+    };
+    sess.destroy(function(err) {
+        if(err){
+            data["Data"] = 'Error destroying session';
+            res.json(data);
+            console.log(data);
+        }else{
+            data["Data"] = 'Session destroy successfully';
+            res.json(data);
+            console.log(data);
+
+ //res.redirect("/login");
+        }
     });
-    res.header("Access-Control-Allow-Origin", "*").sendStatus(200);
-
-
 });
 
 
@@ -186,9 +204,11 @@ app.post('/Login_Data_Send.html',async(req,res)=>{
                 
 
                 if(resp == "true"){
-                    var session=req.session;
+                    session=req.session;
                     session.userid=UserName;
-                    // console.log(req.session);
+
+
+                    console.log(req.session);
 
                     res.send("Logged in!");
                 }else if (resp == "false"){

@@ -7,9 +7,9 @@ function Login(){
     Send_Post_Info("Login_Data_Send.html",DataSent,"test").then((resp)=>{
         document.getElementById("Response_Tag").innerText = resp;
             
-        if (resp == "User account has been succesfully created!"){
+        if (resp == "Logged in!"){
             setTimeout(() => {
-            window.location.href = 'Login.html';
+            window.location.href = 'index.html';
             }, 1000);
         }
     });
