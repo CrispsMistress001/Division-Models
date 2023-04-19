@@ -52,20 +52,31 @@
     <!-- MAIN BODY -->
     <div class="LoginTab Image" style="background-image: url('_img/LoginBackground.png');background-size: cover;">
         <div style="width: 50vw;">
-            <label style="color:red;"id="Response_Tag"></label>
-            <a href="">Don't have an account? Register here!</a>
+            <label style="color:rgb(0, 140, 255);"id="Response_Tag"></label>
+            <a>Already have an account? <span onclick="location.href='Login.html'">Login here!</span></a>
             <br>
+
             <label for="uname"><b>Username</b></label><br>
             <input id="Input_UserName" type="text" placeholder="Enter Username" name="uname" required>
             <br>
+
+            <label for="uemail"><b>Email</b></label><br>
+            <input id="Input_Email" type="text" placeholder="Enter Email" name="uemail" required>
+            <br>
+
             <label for="psw"><b>Password</b></label><br>
             <input id="Input_Password"type="password" placeholder="Enter Password" name="psw" required>
             <br>
+
+            <label for="psw2"><b>Verify Password</b></label><br>
+            <input id="Input_Password2"type="password" placeholder="Enter Password again to verify" name="psw2" required>
+            <br>
+
             <div>
                 <label class="unselectable">
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
-                <button type="submit" onclick="Login()">Login</button>
+                <button type="submit" onclick="Register()">Register</button>
             </div>
             <br>
 

@@ -15,6 +15,24 @@ function Login(){
     });
 }
 
+function Login(){
+    Name = document.getElementById("Input_UserName").value;
+    Pass = document.getElementById("Input_Password").value;
+    Pass2 = document.getElementById("Input_Password2").value;
+    Email = document.getElementById("Input_Email").value;
+
+    var DataSent = "Name="+Name+"&Pass="+Pass;
+    Send_Post_Info("Register_User.html",DataSent,"test").then((resp)=>{
+        document.getElementById("Response_Tag").innerText = resp;
+            
+        if (resp == "Logged in!"){
+            setTimeout(() => {
+            window.location.href = 'index.html';
+            }, 1000);
+        }
+    });
+}
+
 function Send_Post_Info(file,value){
     return new Promise((resolve,reject)=> {
         var xttp = new XMLHttpRequest();

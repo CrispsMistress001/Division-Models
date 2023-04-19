@@ -8,7 +8,7 @@
 
 .LoginTab > div{
     display: flex;
-    height: 100vh ;
+    min-height: 90vh;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -29,14 +29,13 @@
 
     box-sizing: border-box;
     font-size: larger;
-  }
+}
 
 .LoginTab > div > label{
     color: white;
     font-family:  'Bebas Neue', cursive;
     font-size: xx-large;
 }
-
 
 .LoginTab > div > a{
     width: 100%;
@@ -48,6 +47,7 @@
 .LoginTab > div > a > span{
     color: brown;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .LoginTab > div > div>label{

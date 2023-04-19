@@ -52,11 +52,13 @@ const credentials = {
 
 // END OF CERTIFICATES
 
+// THIS APPLICATION IS MADE TO CHECK EXISTING USERS BY PASSING A NEW PROMISE STATEMENT LIKE EXAMPLE BELOW:
+//Check_User(UserName,Pass).then((resp)=> {
+// });
 
-function Check_Login(Users,Password){
+// HOWEVER IF NULL DATA PASSED ONTO PASSWORD IT WILL CHECK ONLY FOR MATCHING USERS
+function Check_User(Users,Password){
     return new Promise((resolve,reject)=> {
-
-        // This is to check whether they have inserted symbols or no
 
             var userFound = false;
 
@@ -66,7 +68,11 @@ function Check_Login(Users,Password){
 
             readInterface.on('line', function(chunk) {
                 //console.log(chunk);
-                if(chunk.split('|')[0] == Users && chunk.split('|')[1] == Password){
+                if(chunk.split('|')[0] == Users && Password == null){
+                    userFound = true;
+                    readInterface.close(); // to stop the reader from continuing to save peformance
+                    readInterface.removeAllListeners()
+                }else if(chunk.split('|')[0] == Users && chunk.split('|')[1] == Password){
                     //console.log("Found user");
                     userFound = true;
                     readInterface.close(); // to stop the reader from continuing to save peformance
@@ -75,19 +81,11 @@ function Check_Login(Users,Password){
             });
 
             readInterface.on('end',function() {
-                if (userFound){
-                    resolve("true");
-                }else{
-                    resolve("false");
-                }
+                return(userFound);
             });
 
             readInterface.on('close',function() {
-                if (userFound){
-                    resolve("true");
-                }else{
-                    resolve("false");
-                }
+                return(userFound);
             });
 
             readInterface.on('error', function (error) {    
@@ -96,55 +94,6 @@ function Check_Login(Users,Password){
 
     });
 
-}
-
-
-
-function UserName_Found(Users){
-    return new Promise((resolve,reject)=> {
-
-        var userFound = false;
-
-        const readInterface = readline.createInterface({
-            input: fs.createReadStream(__dirname+'/_users/Users.txt'),
-            output: process.stdout,
-            console: false
-        });
-
-        readInterface.on('line', function(chunk) {
-            //data += chunk;
-            // check whether password and username is matching
-            //console.log("Username|"+Users+"|password|"+Password);
-            if(chunk.split('|')[0] == Users){
-                //console.log("Found user");
-                userFound = true;
-                readInterface.close(); // to stop the reader from continuing to save peformance
-                readInterface.removeAllListeners();
-            }
-        });
-        
-        readInterface.on('end',function() {
-            if (userFound){
-                resolve("true");
-            }else{
-                resolve("false");
-            }
-        });
-
-        readInterface.on('close',function() {
-            if (userFound){
-                resolve("true");
-            }else{
-                resolve("false");
-            }
-        });
-
-        readInterface.on('error', function (error) {
-            console.log(`error: ${error.message}`);
-        });
-
-
-    });
 }
 
 app.get('/',function(req,res){
@@ -200,13 +149,11 @@ app.post('/Login_Data_Send.html',async(req,res)=>{
             var Pass = req.body.Pass;
             //console.log(req.body.Name +"|"+req.body.Pass);
 
-            Check_Login(UserName,Pass).then((resp)=> {
-                
+            Check_User(UserName,Pass).then((resp)=> {
 
                 if(resp == "true"){
                     session=req.session;
                     session.userid=UserName;
-
 
                     console.log(req.session);
 
@@ -234,28 +181,40 @@ app.post('/Login_Data_Send.html',async(req,res)=>{
 
 app.post('/Register_User.html',(req,res)=>{
     try {
-        if(req.body.Username == "" || req.body.Password == "" || req.body.Password_Ver==""){
-            //console.log(req.body.Name +"|"+req.body.Pass);
+        if(req.body.Username == "" || req.body.Email == "" || req.body.Password == "" || req.body.Password_Ver==""){
             res.send("Each information must be filled!");
-        }else{
+        }else if (req.body.Password != req.body.Password_Ver){
+            res.send("Passwords must be matching!");
+        }
+        else{
             var UserName = req.body.Username;
+            var Email = req.body.Email;
             var Pass = req.body.Password;
-            var Pass_Ver = req.body.Password_Ver;
+            Check_User(UserName,null).then((resp)=> {
+                if(!resp){
+                    session=req.session;
+                    session.userid=UserName;
 
-            if (Pass != Pass_Ver){
-                res.send("Ensure that both password and verification password are equal!");
-            }else{
-                Register_User(UserName,Pass,Pass_Ver).then((resp)=> {
-                
-                    if(resp == "true"){
-                        res.send("User account has been succesfully created!");
-                    }else if (resp == "found"){
-                        res.send('User with this name already exists!');
-                    }else{
-                        res.send("Unkown error has occured");
-                    }
-                });
-            }
+                    console.log(req.session);
+
+                    Register_User(UserName,Pass).then((resp)=> {
+                        if(resp){
+                            res.send("User account has been succesfully created!");
+                        }else if (!resp){
+                            res.send('Failed to create the user!');
+                        }else{
+                            res.send("Unkown error has occured");
+                        }
+                    });
+                }else if (resp){
+                    res.send('User with same username has been found');
+                }else{
+                    res.send("Unkown error has occured");
+                }
+                console.log("User check - "+resp);
+
+            });
+            
         }
 
     } catch (error) {
@@ -264,32 +223,17 @@ app.post('/Register_User.html',(req,res)=>{
     }
 });
 
-function Register_User(Users,Password, Password_Ver){
+function Register_User(Users,Password,Email){
     return new Promise((resolve,reject)=> {
-
-        // This is to check whether they have inserted symbols or no
-            // check whether the user exists already
-            UserName_Found(Users).then((resp)=> {
-                // console.log(resp);
-                if(resp == "true"){
-                    resolve('found');
-                }else if (resp == "false"){
-                    fs.appendFile(__dirname+'/_users/Users.txt',"\n"+Users+"|"+Password, function(err){
-                        if (err) {
-                            console.log(err);
-                          }
-                    });
-                    resolve("true");
-                }else{
-                    resolve("error");
-                }
-            });
-        
-
+        fs.appendFile(__dirname+'/_users/Users.txt',"\n"+Users+"|"+Password, function(err){
+            if (err) {
+                console.log(err);
+                resolve(false);
+            }
+        });
+        resolve(true);
     });
-
 }
-
 
 ///////////////// END
 // https.createServer(credentials, app).listen(3000,function(){
