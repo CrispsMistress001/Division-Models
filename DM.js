@@ -69,11 +69,12 @@ function Check_User(Users,Password){
             readInterface.on('line', function(chunk) {
                 //console.log(chunk);
                 if(chunk.split('|')[0] == Users && Password == null){
+                    // console.log("Found user");
                     userFound = true;
                     readInterface.close(); // to stop the reader from continuing to save peformance
                     readInterface.removeAllListeners()
                 }else if(chunk.split('|')[0] == Users && chunk.split('|')[1] == Password){
-                    //console.log("Found user");
+                    // console.log("Found user");
                     userFound = true;
                     readInterface.close(); // to stop the reader from continuing to save peformance
                     readInterface.removeAllListeners()
@@ -81,11 +82,12 @@ function Check_User(Users,Password){
             });
 
             readInterface.on('end',function() {
-                return(userFound);
+                // console.log("Found user");
+                resolve(userFound);
             });
 
             readInterface.on('close',function() {
-                return(userFound);
+                resolve(userFound);
             });
 
             readInterface.on('error', function (error) {    
@@ -150,15 +152,15 @@ app.post('/Login_Data_Send.html',async(req,res)=>{
             //console.log(req.body.Name +"|"+req.body.Pass);
 
             Check_User(UserName,Pass).then((resp)=> {
-
-                if(resp == "true"){
+                //console.log(resp);
+                if(resp){
                     session=req.session;
                     session.userid=UserName;
 
                     console.log(req.session);
 
                     res.send("Logged in!");
-                }else if (resp == "false"){
+                }else if (!resp){
                     res.send('Invalid username or password');
                 }else{
                     res.send("Unkown error has occured");
@@ -174,22 +176,22 @@ app.post('/Login_Data_Send.html',async(req,res)=>{
     }
 });
 
-
-
-
 /////////////// REGISTER
 
 app.post('/Register_User.html',(req,res)=>{
     try {
-        if(req.body.Username == "" || req.body.Email == "" || req.body.Password == "" || req.body.Password_Ver==""){
+        console.log(req.body.Name +"|"+req.body.Pass+"|"+req.body.Pass2);
+
+        if(req.body.Name == "" || req.body.Email == "" || req.body.Pass == "" || req.body.Pass2==""){
             res.send("Each information must be filled!");
-        }else if (req.body.Password != req.body.Password_Ver){
+        }else if (req.body.Pass != req.body.Pass2){
             res.send("Passwords must be matching!");
         }
         else{
-            var UserName = req.body.Username;
+            var UserName = req.body.Name;
             var Email = req.body.Email;
-            var Pass = req.body.Password;
+            var Pass = req.body.Pass;
+            console.log(UserName +"|"+Pass+"|"+Email);
             Check_User(UserName,null).then((resp)=> {
                 if(!resp){
                     session=req.session;
@@ -197,7 +199,7 @@ app.post('/Register_User.html',(req,res)=>{
 
                     console.log(req.session);
 
-                    Register_User(UserName,Pass).then((resp)=> {
+                    Register_User(UserName,Pass,Email).then((resp)=> {
                         if(resp){
                             res.send("User account has been succesfully created!");
                         }else if (!resp){
@@ -211,8 +213,6 @@ app.post('/Register_User.html',(req,res)=>{
                 }else{
                     res.send("Unkown error has occured");
                 }
-                console.log("User check - "+resp);
-
             });
             
         }
@@ -225,7 +225,7 @@ app.post('/Register_User.html',(req,res)=>{
 
 function Register_User(Users,Password,Email){
     return new Promise((resolve,reject)=> {
-        fs.appendFile(__dirname+'/_users/Users.txt',"\n"+Users+"|"+Password, function(err){
+        fs.appendFile(__dirname+'/_users/Users.txt',"\n"+Users+"|"+Password+"|"+Email, function(err){
             if (err) {
                 console.log(err);
                 resolve(false);

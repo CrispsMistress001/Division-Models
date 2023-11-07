@@ -6,7 +6,6 @@ function Login(){
     var DataSent = "Name="+Name+"&Pass="+Pass;
     Send_Post_Info("Login_Data_Send.html",DataSent,"test").then((resp)=>{
         document.getElementById("Response_Tag").innerText = resp;
-            
         if (resp == "Logged in!"){
             setTimeout(() => {
             window.location.href = 'index.html';
@@ -15,13 +14,13 @@ function Login(){
     });
 }
 
-function Login(){
+function Register(){
     Name = document.getElementById("Input_UserName").value;
     Pass = document.getElementById("Input_Password").value;
     Pass2 = document.getElementById("Input_Password2").value;
     Email = document.getElementById("Input_Email").value;
 
-    var DataSent = "Name="+Name+"&Pass="+Pass;
+    var DataSent = "Name="+Name+"&Pass="+Pass+"&Pass2="+Pass2+"&Email="+Email;
     Send_Post_Info("Register_User.html",DataSent,"test").then((resp)=>{
         document.getElementById("Response_Tag").innerText = resp;
             
